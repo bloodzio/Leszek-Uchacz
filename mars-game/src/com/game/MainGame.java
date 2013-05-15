@@ -1,6 +1,6 @@
 package com.game;
 
-import com.badlogic.gdx.ApplicationListener;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -10,7 +10,10 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class MainGame implements ApplicationListener {
+public class MainGame extends GameActivity {
+	
+	private Resources resourceInstace = Resources.getInstance();
+	//**  Auto generate */
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private Texture texture;
@@ -20,12 +23,13 @@ public class MainGame implements ApplicationListener {
 	public void create() {		
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
-		
+		Gdx.app.log("onCreate ", " = True ");
 		camera = new OrthographicCamera(1, h/w);
 		batch = new SpriteBatch();
 		
 		texture = new Texture(Gdx.files.internal("data/libgdx.png"));
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		Texture rockTexture = Container(new Texture(Gdx.files.internal("data/rock.png"), true));
 		
 		TextureRegion region = new TextureRegion(texture, 0, 0, 512, 275);
 		
@@ -62,5 +66,18 @@ public class MainGame implements ApplicationListener {
 
 	@Override
 	public void resume() {
+	}
+
+	@Override
+	public void init() {
+		resourceInstace.reInit();
+		
+		
+	}
+
+	@Override
+	public void draw(float delta) {
+		// TODO Auto-generated method stub
+		
 	}
 }
